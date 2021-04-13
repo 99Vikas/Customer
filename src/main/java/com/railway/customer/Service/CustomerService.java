@@ -17,7 +17,7 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Optional<Customer> updateCustomer(String id, Customer customer) {
+    public Optional<Customer> updateCustomer(int id, Customer customer) {
         Optional<Customer> customer1 = customerRepository.findById(id);
         if (customer1.isPresent()) {
             customer.setId(id);
@@ -26,7 +26,7 @@ public class CustomerService {
         return Optional.empty();
     }
 
-    public Optional<Customer> deleteCustomer(String id) {
+    public Optional<Customer> deleteCustomer(int id) {
         Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isPresent()){
             customerRepository.deleteById(id);
@@ -35,7 +35,7 @@ public class CustomerService {
         return Optional.empty();
     }
 
-    public Optional<Customer> findCustomerById(String id) {
+    public Optional<Customer> findCustomerById(int id) {
         return customerRepository.findById(id);
     }
 

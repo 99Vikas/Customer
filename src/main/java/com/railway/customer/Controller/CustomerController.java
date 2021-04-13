@@ -26,12 +26,11 @@ public class CustomerController {
     public Customer registerUser(@RequestBody Customer customer) {
         System.out.println(customer);
         customerService.createCustomer(customer);
-//        roleService.createRole(user.getRole());
         return customer;
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Customer> updateUser(@PathVariable String id, @RequestBody Customer customer) {
+    public ResponseEntity<Customer> updateUser(@PathVariable int id, @RequestBody Customer customer) {
         System.out.println(customer);
         Optional<Customer> customer1 = customerService.updateCustomer(id, customer);
         if (customer1.isPresent()) {
@@ -40,7 +39,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Customer> deleteUser(@PathVariable String id) {
+    public ResponseEntity<Customer> deleteUser(@PathVariable int id) {
         Optional<Customer> customer = customerService.deleteCustomer(id);
         if (customer.isPresent()) {
             return ResponseEntity.ok(customer.get());
@@ -56,7 +55,7 @@ public class CustomerController {
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<Customer> getUserById(@PathVariable String id) {
+    public ResponseEntity<Customer> getUserById(@PathVariable int id) {
         Optional<Customer> customer = customerService.findCustomerById(id);
         if (customer.isPresent()) {
             return ResponseEntity.ok(customer.get());
