@@ -9,8 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CustomerRepository extends MongoRepository<Customer, String> {
 
-    public void deleteByEmail(String email);
-
     public Optional<Customer> findByEmail(String email);
 
 }
