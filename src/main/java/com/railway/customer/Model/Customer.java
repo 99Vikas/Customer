@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 public class Customer {
     @Id
-    private String id;
+    private int id;
     private String firstName;
     private String lastName;
     @Indexed
