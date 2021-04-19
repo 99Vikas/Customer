@@ -2,6 +2,7 @@ package com.railway.customer.Service;
 
 import com.railway.customer.Model.Customer;
 import com.railway.customer.Repository.CustomerRepository;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Optional<Customer> updateCustomer(int id, Customer customer) {
+    public Optional<Customer> updateCustomer(String id, Customer customer) {
         Optional<Customer> customer1 = customerRepository.findById(id);
         if (customer1.isPresent()) {
             customer.setId(id);
@@ -26,7 +27,7 @@ public class CustomerService {
         return Optional.empty();
     }
 
-    public Optional<Customer> deleteCustomer(int id) {
+    public Optional<Customer> deleteCustomer(String id) {
         Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isPresent()){
             customerRepository.deleteById(id);
@@ -35,7 +36,7 @@ public class CustomerService {
         return Optional.empty();
     }
 
-    public Optional<Customer> findCustomerById(int id) {
+    public Optional<Customer> findCustomerById(String id) {
         return customerRepository.findById(id);
     }
 
