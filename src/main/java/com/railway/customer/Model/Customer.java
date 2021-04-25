@@ -20,24 +20,16 @@ public class Customer {
     private String id;
     private String firstName;
     private String lastName;
-    @Indexed
+    private String gender;
+    @Indexed(unique = true)
     private String email;
-    private Date dob;
     @Indexed(unique = true)
     private String mobileNumber;
-    private String password;
+    private String createPassword;
     private String role;
 
     @Override
     public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", dob=" + dob +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+        return super.toString();
     }
 }

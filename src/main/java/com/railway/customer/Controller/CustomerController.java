@@ -3,27 +3,32 @@ package com.railway.customer.Controller;
 import com.railway.customer.ExceptionHandling.CustomerNotFoundException;
 import com.railway.customer.Model.Customer;
 import com.railway.customer.Service.CustomerService;
-import com.railway.customer.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/customer")
 public class CustomerController {
 
     @Autowired
     CustomerService customerService;
 
 
-    @Autowired
-    RoleService roleService;
+    @Bean
+    private BCryptPasswordEncoder bCryptPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 
     @PostMapping("/signup")
     public Customer registerUser(@RequestBody Customer customer) {
         System.out.println(customer);
+        customer.setCreatePassword(bCryptPasswordEncoder().encode(customer.getCreatePassword()));
         customerService.createCustomer(customer);
         return customer;
     }

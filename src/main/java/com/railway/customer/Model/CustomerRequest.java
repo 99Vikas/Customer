@@ -12,6 +12,5 @@ import lombok.Setter;
 public class CustomerRequest {
 
     private Customer customer;
-    private Role role;
 
 }
