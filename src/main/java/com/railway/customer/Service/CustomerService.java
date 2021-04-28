@@ -2,10 +2,10 @@ package com.railway.customer.Service;
 
 import com.railway.customer.Model.Customer;
 import com.railway.customer.Repository.CustomerRepository;
-import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,5 +42,9 @@ public class CustomerService {
 
     public Optional<Customer> findCustomerByEmail(String email) {
         return customerRepository.findByEmail(email);
+    }
+
+    public List<Customer> getAll(){
+        return customerRepository.findAll();
     }
 }

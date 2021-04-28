@@ -25,7 +25,7 @@ public class Customer {
     private String email;
     @Indexed(unique = true)
     private String mobileNumber;
-    private String createPassword;
+    private String password;
     private String role;
 
     @Override

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*")
@@ -26,15 +27,15 @@ public class CustomerController {
     }
 
     @PostMapping("/signup")
-    public Customer registerUser(@RequestBody Customer customer) {
+    public Customer registerCustomer(@RequestBody Customer customer) {
         System.out.println(customer);
-        customer.setCreatePassword(bCryptPasswordEncoder().encode(customer.getCreatePassword()));
+        customer.setPassword(bCryptPasswordEncoder().encode(customer.getPassword()));
         customerService.createCustomer(customer);
         return customer;
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Customer> updateUser(@PathVariable String id, @RequestBody Customer customer) {
+    public ResponseEntity<Customer> updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
         System.out.println(customer);
         Optional<Customer> customer1 = customerService.updateCustomer(id, customer);
         if (customer1.isPresent()) {
@@ -43,7 +44,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Customer> deleteUser(@PathVariable String id) {
+    public ResponseEntity<Customer> deleteCustomer(@PathVariable String id) {
         Optional<Customer> customer = customerService.deleteCustomer(id);
         if (customer.isPresent()) {
             return ResponseEntity.ok(customer.get());
@@ -51,7 +52,7 @@ public class CustomerController {
     }
 
     @GetMapping("/getByEmail/{email}")
-    public ResponseEntity<Customer> getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) {
         Optional<Customer> customer = customerService.findCustomerByEmail(email);
         if (customer.isPresent()) {
             return ResponseEntity.ok(customer.get());
@@ -64,6 +65,13 @@ public class CustomerController {
         if (customer.isPresent()) {
             return ResponseEntity.ok(customer.get());
         }else throw new CustomerNotFoundException("Customer with id " + id + " is not available.");
+    }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Customer>> getAllUsers() {
+        Optional<List<Customer>> customers = Optional.ofNullable(customerService.getAll());
+        if (customers.isPresent()) {
+            return ResponseEntity.ok(customers.get());
+        }else throw new CustomerNotFoundException("Customers are not available.");
     }
 
 }
