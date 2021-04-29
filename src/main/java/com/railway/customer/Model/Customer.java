@@ -24,6 +24,7 @@ public class Customer {
     @Indexed(unique = true)
     private String email;
     @Indexed(unique = true)
+    private Date dob;
     private String mobileNumber;
     private String password;
     private String role;
